@@ -1,0 +1,5 @@
+com\esprit\microservice\clientservice\ClientApplication.class
+com\esprit\microservice\clientservice\Service\ClientService.class
+com\esprit\microservice\clientservice\Controller\ClientController.class
+com\esprit\microservice\clientservice\Entity\Client.class
+com\esprit\microservice\clientservice\Repository\ClientRepository.class
