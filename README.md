@@ -1,6 +1,5 @@
 # micro-service
-# VoyageAffaire
-# Projet de Voyage Microservices
+# # Projet de Voyage Microservices
 
 Projet de Voyage Microservices est une application qui permet d'aider les entreprises à trouver des partenaires de voyage dans le monde professionnel, facilitant ainsi le développement de leurs activités en trouvant des partenaires actifs dans les domaines qui intéressent l'entreprise.
 
