@@ -3,15 +3,16 @@ version: "3.9"
 services:
  
  eurekaserver:
-   build: C:\Users\SPIRIT\Videos\microService\eureuka
+   build: C:\Users\yariahi\Desktop\micro-service\eureuka
    container_name: eureka
    image: eureka-images
    networks:
       - eureka-server
    ports:
     - "8761:8761"
- 
- microservice-voyage:
+
+
+  microservice-voyage:
    build: C:\Users\SPIRIT\Videos\microService\Voyage
   #  network_mode: host 
    image: voyage-images
@@ -43,6 +44,19 @@ services:
    image: zuul-images
    ports:
    - "8762:8762"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+   depends_on:
+     - eurekaserver
+     
+ microservice-entreprise:
+   build: C:\Users\yariahi\Desktop\Microservice\EntrepriseServer
+  #  network_mode: host 
+   image: entreprise-images
+   ports:
+   - "8099:8099"
    networks:
       - eureka-server
    environment:
