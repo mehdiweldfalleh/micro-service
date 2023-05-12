@@ -1,0 +1,5 @@
+com\esprit\microservice\VoyageService\Controller\VoyageController.class
+com\esprit\microservice\VoyageService\Entity\Voyage.class
+com\esprit\microservice\VoyageService\VoyageApplication.class
+com\esprit\microservice\VoyageService\Services\VoyageService.class
+com\esprit\microservice\VoyageService\Repositories\VoyageRepository.class
