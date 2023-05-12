@@ -6,9 +6,9 @@ Projet de Voyage Microservices est une application qui permet d'aider les entrep
 
 Ce projet a été réalisé par un groupe de 3 personnes, chacune étant responsable d'un microservice spécifique :
 
-- Yasmine : Entreprise Server + Eureka + Docker + MySQL + Zuul Gateway
-- Mehdi : Client Server + Eureka + Docker + H2 DB + Zuul Gateway
-- Senda : Voyage Server + Eureka + Docker + SQL + Zuul Gateway
+- Yasmine : Entreprise Server + Eureka + Docker + H2 + Zuul Gateway
+- Mehdi : Client Server + Eureka + Docker + H2  + Zuul Gateway
+- Senda : Voyage Server + Eureka + Docker + H2 + Zuul Gateway
 
 # Avis des clients
 
@@ -22,7 +22,6 @@ De plus, nous avons développé un service permettant aux clients de donner leur
 - Java 8
 - Node.js
 - MongoDB
-- MySQL
 - H2 Database
 - Docker
 ## Prérequis
@@ -39,7 +38,7 @@ Avant de pouvoir exécuter le projet, assurez-vous d'avoir installé les éléme
 1. Clonez le dépôt GitHub :
 
    ```shell
-   git clone https://github.com/votre-nom/projet-voyage-microservices.git
+   git clone [https://github.com/votre-nom/projet-voyage-microservices.git](https://github.com/mehdiweldfalleh/micro-service.git)
 
 
 2. Ouvrez chaque microservice dans Visual Studio Code et installez les dépendances nécessaires.
@@ -92,7 +91,76 @@ public class ConfigserverApplication {
 }
 ````
 
-# Exemple de Postman
-
 # Spring Cloud/Netflix Eureka
 
+- La découverte de services est essentielle pour les microservices pour deux raisons principales. Elle offre à l'application la possibilité d'augmenter rapidement le nombre d'instances de service exécutées dans un environnement. Les consommateurs de services sont abstraits de l'emplacement physique du service via la découverte de services. Étant donné que les consommateurs de services ne connaissent pas l'emplacement physique des instances de service réelles, de nouvelles instances de service peuvent être ajoutées ou supprimées du pool de services disponibles.
+
+- Le deuxième avantage de la découverte de services est qu'elle contribue à augmenter la résilience des applications. Lorsqu'une instance de microservice devient instable ou indisponible, la plupart des moteurs de découverte de services la suppriment de la liste interne des services disponibles. Les dommages causés par un service indisponible seront minimisés, car le moteur de découverte de services acheminera les appels aux services disponibles
+
+````shell
+<!-- Les dépendances de Eureka client (message service) -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+````
+
+````
+spring.application.name = eureka
+server.port = 8761
+#ne pas enregistrer les microservices qui ne sont pas métier
+eureka.client.register-with-eureka=false
+#ne pas garder les microservices qui sont arréter
+eureka.client.fetch-registry=false
+````
+
+````java
+@SpringBootApplication
+@EnableEurekaServer
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+}
+````
+# Configuration de Eureka client
+
+````shell
+<!-- Les dépendances de Eureka client (message service) -->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+````
+````
+spring.application.name=entreprise-service
+server.port=8099
+#Eeureka server url
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka
+
+````
+
+````java
+@SpringBootApplication
+@EnableEurekaClient
+public class EntrepriseServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(EntrepriseServiceApplication.class, args);
+	}
+
+}
+````
