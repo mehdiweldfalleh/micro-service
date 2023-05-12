@@ -326,3 +326,36 @@ Assurez-vous d'avoir Docker et Docker Compose installés sur votre machine avant
 
 ![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/3f53cb61-6648-4b3c-9108-8b0ff9209564)
 
+# MySQL et Configuration dans Docker Compose
+Ce projet utilise Docker Compose pour gérer le déploiement d'une architecture de microservices avec une base de données MySQL. Docker Compose facilite la conteneurisation et l'orchestration des différents services nécessaires à l'application.
+
+## Prérequis
+Avant d'exécuter l'application, assurez-vous d'avoir Docker et Docker Compose installés sur votre machine. Vous pouvez trouver les instructions d'installation pour Docker ici et pour Docker Compose ici.
+
+## Configuration de MySQL
+Le fichier docker-compose.yml du projet contient la configuration du service MySQL (mysql-db) utilisé par le service entreprise-service. Par défaut, le service MySQL est configuré avec les paramètres suivants :
+
+Version MySQL : latest
+Nom de la base de données : entreprise_db
+Nom d'utilisateur : root
+Mot de passe : MYSQL_ROOT_PASSWORD (défini comme une variable d'environnement)
+Vous pouvez personnaliser ces paramètres selon vos besoins. Assurez-vous de conserver les variables d'environnement et les volumes nécessaires si vous modifiez la configuration.
+
+## Exécution de l'application
+Pour exécuter l'application, suivez les étapes suivantes :
+
+Ouvrez un terminal ou une invite de commande.
+
+Accédez au répertoire du projet.
+
+Exécutez la commande suivante pour démarrer l'application à l'aide de Docker Compose :
+
+````shell
+docker-compose up
+````
+
+Docker Compose construira et démarrera les conteneurs définis dans le fichier docker-compose.yml. Vous verrez des journaux indiquant l'avancement de chaque service.
+
+Une fois que tous les services sont en cours d'exécution, vous pouvez accéder au service entreprise-service via le port spécifié. Référez-vous à la documentation spécifique du service pour plus d'informations sur l'accès et l'interaction avec les microservices.
+
+
