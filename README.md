@@ -55,9 +55,15 @@ mvn spring-boot:run
 
 4. Accédez à l'URL http://localhost:8761 pour accéder au tableau de bord Eureka et vérifier que tous les microservices sont enregistrés et en cours d'exécution.
 
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/64befd5a-df16-4ca7-b566-b71f019d030a)
 
 
 5. Accédez à l'URL http://localhost:8762/nom-service/path  ( exemple : http://localhost:8762/entreprise-service/entreprise/retreiveAllEntreprises )  pour accéder a Zuul Gateway.
+http://localhost:8762/login
+username:user
+password:user
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/fcb40f3e-de9b-48d5-b1ed-c04b9064a2b1)
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/c5e65fe8-df80-4167-9e1e-99732f740f4f)
 
 
 
@@ -231,4 +237,92 @@ public BasicAuthRequestInterceptor mbBasicAuthRequestInterceptor(){
 - Zuul peut préfixer tous les itinéraires gérés, afin que vous puissiez facilement préfixer vos itinéraires avec quelque chose comme /api.
 - En utilisant le serveur Spring Cloud Config, vous pouvez recharger dynamiquement les mappings de route sans avoir à redémarrer le serveur Zuul.
 
+# Docker Compose 
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/3b542eab-a27d-4e0f-93af-6c7e94254060)
+
+- Docker Compose est un outil permettant de définir et de gérer des applications multi-conteneurs. Il utilise un fichier YAML pour décrire les services, les réseaux et les volumes nécessaires à votre application. Chaque service représente un conteneur Docker, qui peut être une partie de votre application ou un service tiers.
+
+- Dans le cadre de notre projet de microservices avec Eureka, Docker Compose est utilisé pour orchestrer les différents services. Eureka est un service de découverte de services développé par Netflix, qui permet aux microservices de s'enregistrer et de découvrir les autres services disponibles dans l'environnement.
+
+- Le fichier docker-compose.yml fourni dans ce référentiel définit 5 services :
+
+````yml
+version: "3.9"
+
+services:
+ 
+ eurekaserver:
+   build: C:\Users\yariahi\Desktop\micro-service\eureuka
+   container_name: eureka
+   image: eureka-images
+   networks:
+      - eureka-server
+   ports:
+    - "8761:8761"
+
+ zuul-gateway:
+   build: C:\Users\yariahi\Desktop\micro-service\Zuul-Gateway\Zuul-Gateway
+  #  network_mode: host 
+   image: zuul-images
+   ports:
+   - "8762:8762"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+   depends_on:
+     - eurekaserver
+
+ microservice-voyage:
+   build: C:\Users\yariahi\Desktop\micro-service\Voyage
+  #  network_mode: host 
+   image: voyage-images
+   ports:
+   - "8085:8085"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+   depends_on:
+     - eurekaserver
+
+ microservice-client:
+   build: C:\Users\yariahi\Desktop\micro-service\Client
+  #  network_mode: host 
+   image: client-images
+   ports:
+   - "8090:8090"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+   depends_on:
+     - eurekaserver
+  
+ microservice-entreprise:
+   build: C:\Users\yariahi\Desktop\micro-service\Entreprise
+  #  network_mode: host 
+   image: entreprise-images
+   ports:
+   - "8099:8099"
+   networks:
+      - eureka-server
+   environment:
+    - eureka.client.serviceUrl.defaultZone=http://eureka:8761/eureka
+   depends_on:
+     - eurekaserver
+
+networks:
+  eureka-server:
+    name: eureka-server
+    driver: bridge
+
+````
+
+
+Pour lancer l'application, exécutez la commande docker-compose up à partir du répertoire racine du projet. Docker Compose se chargera de créer les conteneurs Docker pour chaque service, de les connecter au réseau approprié et de gérer les volumes et les dépendances définis dans le fichier.
+
+Assurez-vous d'avoir Docker et Docker Compose installés sur votre machine avant d'exécuter l'application.
+
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/3f53cb61-6648-4b3c-9108-8b0ff9209564)
 
