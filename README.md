@@ -5,7 +5,7 @@ Projet de Voyage Microservices est une application qui permet d'aider les entrep
 
 Ce projet a été réalisé par un groupe de 3 personnes, chacune étant responsable d'un microservice spécifique :
 
-- Yasmine : Entreprise Server + Eureka + Docker + H2 + Zuul Gateway
+- Yasmine : Entreprise Server + Eureka + Docker + Mysql + Zuul Gateway
 - Mehdi : Client Server + Eureka + Docker + H2  + Zuul Gateway
 - Senda : Voyage Server + Eureka + Docker + H2 + Zuul Gateway
 
