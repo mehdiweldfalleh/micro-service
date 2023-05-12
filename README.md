@@ -14,7 +14,14 @@ Ce projet a été réalisé par un groupe de 3 personnes, chacune étant respons
 L'application comprend également une fonctionnalité d'avis des clients développée avec Node.js et MongoDB.
 
 
-De plus, nous avons développé un service permettant aux clients de donner leur avis sur les partenaires de voyage, utilisant Node.js et MongoDB.
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/cbd3f094-59c5-4dcc-82d8-8ffc82c2f30a)
+
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/c95c8acb-cc77-4769-9394-0a4012c64e77)
+
+````
+node ./server.js
+
+````
 
 ## Technologies Utilisées
 - Visual Studio Code
@@ -48,9 +55,15 @@ mvn spring-boot:run
 
 4. Accédez à l'URL http://localhost:8761 pour accéder au tableau de bord Eureka et vérifier que tous les microservices sont enregistrés et en cours d'exécution.
 
-5. Pour exécuter le service d'avis des clients, assurez-vous d'avoir MongoDB installé et exécutez la commande suivante dans le terminal :
 
-cd avis-des-clients
+
+5. Accédez à l'URL http://localhost:8762/nom-service/path  ( exemple : http://localhost:8762/entreprise-service/entreprise/retreiveAllEntreprises )  pour accéder a Zuul Gateway.
+
+
+
+6. Pour exécuter le service d'avis des clients, assurez-vous d'avoir MongoDB installé et exécutez la commande suivante dans le terminal :
+
+cd avis
 npm install
 node server.js
 
