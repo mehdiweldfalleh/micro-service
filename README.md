@@ -164,3 +164,59 @@ public class EntrepriseServiceApplication {
 
 }
 ````
+# Exemple d'interaction
+
+En cas d'appel à http://localhost:8761, on voit que Entreorise service a été enregistré auprès d'Eureka.
+
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/007c3886-235a-4b61-b385-539a31edfe49)
+
+# Passerelle de services – Spring Cloud/Netflix Zuul
+
+Dans une architecture distribuée comme celle des microservices une passerelle de services sert d'intermédiaire entre un service et le client qui l'appelle. Le client ne parle qu'à une seule URL gérée par la passerelle de services. La passerelle de services distingue le chemin provenant de l'appel du client et détermine le service que le client tente d'invoquer.
+
+![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/a20faf3f-fcae-45e8-8193-20a819680785)
+
+
+# Configuration de Zuul
+
+````shell
+<!-- Les dépendances de Zuul -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-zuul</artifactId>
+</dependency>
+````
+````
+spring.application.name=zuul-gateway
+server.port=8762
+eureka.instance.prefer-ip-address=true 
+eureka.client.register-with-eureka=true 
+eureka.client.fetchRegistry=true
+eureka.client.serviceUrl.defaultZone=${EUREKA_URI:http://localhost:8761/eureka}
+zuul.host.socket-timeout-millis: 30000 
+zuul.routes.client-service.path=/client-service/*
+zuul.routes.client.serviceId=client-service
+zuul.routes.entreprise-service.path=/entreprise-service
+zuul.routes.entreprise.serviceId=entreprise-service/*
+#zuul.routes.reclamation-service.path=/users
+#zuul.routes.reclamation.serviceId=/users/*
+spring.security.user.name=user
+spring.security.user.password=user  
+````
+
+````java
+@Configuration
+public class FeignConfig {
+@Bean
+public BasicAuthRequestInterceptor mbBasicAuthRequestInterceptor(){
+    return new BasicAuthRequestInterceptor("user","user");
+}    
+}
+````
+
+- Spring Cloud facilite la création d'une passerelle de services.
+- La passerelle de services Zuul s'intègre au serveur Eureka de Netflix et peut automatiquement mapper les services enregistrés auprès d'Eureka sur une route Zuul.
+- Zuul peut préfixer tous les itinéraires gérés, afin que vous puissiez facilement préfixer vos itinéraires avec quelque chose comme /api.
+- En utilisant le serveur Spring Cloud Config, vous pouvez recharger dynamiquement les mappings de route sans avoir à redémarrer le serveur Zuul.
+
+
