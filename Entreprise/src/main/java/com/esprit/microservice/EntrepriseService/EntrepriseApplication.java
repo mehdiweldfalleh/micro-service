@@ -19,14 +19,6 @@ public class EntrepriseApplication {
 		SpringApplication.run(EntrepriseApplication.class, args);
 	}
 	
-	 @Bean
-	    ApplicationRunner init(EntrepriseRepository repository) {
-	        return args -> {
-	            Stream.of("Vermeg", "Sopra", "Talent").forEach(nom -> {
-	                repository.save(new Entreprise(nom));
-	            });
-	            repository.findAll().forEach(System.out::println);
-	        };
-	    }
+	
 
 }
