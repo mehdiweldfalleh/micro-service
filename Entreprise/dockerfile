@@ -1,0 +1,4 @@
+FROM  openjdk:8-slim
+EXPOSE 8099
+ADD /target/Entreprise-0.0.1-SNAPSHOT.jar Entreprise-0.0.1-SNAPSHOT.jar 
+ENTRYPOINT ["java", "-jar", "Entreprise-0.0.1-SNAPSHOT.jar"]

@@ -1,0 +1,5 @@
+com\esprit\microservice\EntrepriseService\Entity\Entreprise.class
+com\esprit\microservice\EntrepriseService\Controller\EntrepriseController.class
+com\esprit\microservice\EntrepriseService\EntrepriseApplication.class
+com\esprit\microservice\EntrepriseService\Repositories\EntrepriseRepository.class
+com\esprit\microservice\EntrepriseService\Services\EntrepriseService.class
