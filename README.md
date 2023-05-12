@@ -2,7 +2,6 @@
 
 Projet de Voyage Microservices est une application qui permet d'aider les entreprises à trouver des partenaires de voyage dans le monde professionnel, facilitant ainsi le développement de leurs activités en trouvant des partenaires actifs dans les domaines qui intéressent l'entreprise.
 
-# Microservices
 
 Ce projet a été réalisé par un groupe de 3 personnes, chacune étant responsable d'un microservice spécifique :
 
@@ -10,7 +9,7 @@ Ce projet a été réalisé par un groupe de 3 personnes, chacune étant respons
 - Mehdi : Client Server + Eureka + Docker + H2  + Zuul Gateway
 - Senda : Voyage Server + Eureka + Docker + H2 + Zuul Gateway
 
-# Avis des clients
+## Avis des clients
 
 L'application comprend également une fonctionnalité d'avis des clients développée avec Node.js et MongoDB.
 
@@ -129,7 +128,7 @@ public class DemoApplication {
 
 }
 ````
-# Configuration de Eureka client
+## Configuration de Eureka client
 
 ````shell
 <!-- Les dépendances de Eureka client (message service) -->
@@ -164,7 +163,7 @@ public class EntrepriseServiceApplication {
 
 }
 ````
-# Exemple d'interaction
+## Exemple d'interaction
 
 En cas d'appel à http://localhost:8761, on voit que Entreorise service a été enregistré auprès d'Eureka.
 
@@ -177,7 +176,7 @@ Dans une architecture distribuée comme celle des microservices une passerelle d
 ![image](https://github.com/mehdiweldfalleh/micro-service/assets/86804472/a20faf3f-fcae-45e8-8193-20a819680785)
 
 
-# Configuration de Zuul
+## Configuration de Zuul
 
 ````shell
 <!-- Les dépendances de Zuul -->
